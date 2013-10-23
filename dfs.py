@@ -45,11 +45,11 @@ def scoreNode_h(node, graph, visited):
 	
 	surround = 'E'
 	for n in node[1:len(node)]:
-		if n.letter == 'W' and surround == 'B' or n.letter == 'B' and surround == 'W':
+		if surround == 'X' or n.letter == 'W' and surround == 'B' or n.letter == 'B' and surround == 'W':
 			return 'X'
 		else:
 			surround = n.letter;
-		
+		surround = scoreNode_h(
 
 fil = open(sys.argv[1], 'r')
 board = fil.read()
