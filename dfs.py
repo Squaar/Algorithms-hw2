@@ -50,8 +50,8 @@ def scoreNode_h(node, graph, visited):
 	
 	prev = node[0].letter
 	for n in node[1:len(node)]:
-		if not visited[n.y*9+n.x]:
-			cur = scoreNode_h(graph[n.y*9+n.x], graph, visited)
+		if not visited[n.x*9+n.y]:
+			cur = scoreNode_h(graph[n.x*9+n.y], graph, visited)
 			if cur == "W" and prev == "B" or cur == "B" and prev == "W":
 				return "X"
 			elif cur == "W" or cur == "B":
@@ -66,7 +66,6 @@ fil.close()
 bb = board.split("\n");
 
 graph = parseBoard(bb[0:len(bb)-1])
-#print(graph)
 
 black = 0
 white = 0
@@ -78,7 +77,5 @@ for i in range(len(graph)):
 			black += 1
 		elif player == "W":
 			white += 1
-		else:
-			print(player)
 print("Black: " + str(black) + "\nWhite:" + str(white))
 
