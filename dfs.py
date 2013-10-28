@@ -38,24 +38,32 @@ def scoreNode(node, graph):
 	return scoreNode_h(node, graph, [False for i in range(len(graph))])
 
 def scoreNode_h(node, graph, visited):
-	if node[0].letter == 'B':
-		return 'B'
-	elif node[0].letter == 'W':
-		return 'W'
+	if visited[node[0].y*9+node[0].x]:
+		return "V"
+	else:
+		visited[node[0].y*9+node[0].x] = True
 	
-	surround = 'E'
+	if node[0].letter == "B":
+		return "B"
+	elif node[0].letter == "W":
+		return "W"
+	
+	prev = node[0].letter
 	for n in node[1:len(node)]:
-		if surround == 'X' or n.letter == 'W' and surround == 'B' or n.letter == 'B' and surround == 'W':
-			return 'X'
-		else:
-			surround = n.letter;
-		surround = scoreNode_h(
+		if not visited[n.y*9+n.x]:
+			cur = scoreNode_h(graph[n.y*9+n.x], graph, visited)
+			if cur == "W" and prev == "B" or cur == "B" and prev == "W":
+				return "X"
+			elif cur == "W" or cur == "B":
+				prev = cur
+	
+	return prev
 
-fil = open(sys.argv[1], 'r')
+fil = open(sys.argv[1], "r")
 board = fil.read()
 fil.close()
 
-bb = board.split('\n');
+bb = board.split("\n");
 
 graph = parseBoard(bb[0:len(bb)-1])
 #print(graph)
@@ -65,10 +73,12 @@ white = 0
 
 for i in range(len(graph)):
 	if graph[i][0].letter == "E":
-		player = scoreNode(graph[i][0], graph)
-		if player == 'B':
+		player = scoreNode(graph[i], graph)
+		if player == "B":
 			black += 1
-		elif player == 'W':
+		elif player == "W":
 			white += 1
+		else:
+			print(player)
 print("Black: " + str(black) + "\nWhite:" + str(white))
 
