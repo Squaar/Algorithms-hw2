@@ -16,11 +16,9 @@ class BoardSpace:
 		return "{" + self.letter + "," + str(self.x) + "," + str(self.y) + "}"
 
 def parseBoard(br):
-	#print(br)
 	gr = []
 	for i in range(len(br)):
 		for j in range(len(br[i])):
-			#print(str(i) + ", " + str(j) + "\t" + br[i][j])
 			gg = []
 			gg.append(BoardSpace(br[i][j], i, j))
 			if i > 0:
