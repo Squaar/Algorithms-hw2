@@ -33,7 +33,7 @@ def removeNode(n): #removes node n from all lists
 
 #graph = [[1,2,3,4], [2,3,5], [3,4,5], [4,5], [5]] #graph to sort
 graph = [[1, 2], [2, 4, 5, 6], [3, 1, 4], [4, 7], [5], [6, 5], [7, 8], [8, 6]] #this graph almost works...
-print "Graph: ", graph
+print("Graph: ", graph)
 
 degreeZero = [] #queue of nodes with degree 0
 inDegrees = [None] + [0] * len(graph) #there is no 0 node
@@ -46,4 +46,4 @@ while len(degreeZero) > 0:
 	removeNode(degreeZero[0])
 	calcDegrees()
 
-print "Sorted: ", ans
+print("Sorted: ", ans)
